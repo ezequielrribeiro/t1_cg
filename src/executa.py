@@ -1,16 +1,22 @@
 from src.LerArquivo import Ler_Arquivo
+from src.Transformacoes import Transformacoes3
 
-"""
-conj_pontos = {}
-with open('pontos.csv', newline='') as csvfile:
-    reader = csv.DictReader(csvfile)
-    for row in reader:
-        obj = Ponto(row['x'], row['y'], row['z'])
-        conj_pontos[row['label']] = obj
 
-    print(conj_pontos)
-"""
-
-leArquivo = Ler_Arquivo("pontos.csv", "desenha_linhas.csv")
+leArquivo = Ler_Arquivo("../pontos.csv", "../desenha_linhas.csv")
 ObjDesenho = leArquivo.ler_arquivo()
-print(ObjDesenho.__dict__)
+listaPontos = ObjDesenho.get_conj_pontos()
+transforma = Transformacoes3()
+
+for key in listaPontos:
+    transforma.adiciona_ponto(listaPontos[key])
+
+transforma.empilha_translacao(2,2,2)
+transforma.gera_matriz_transf()
+transforma.aplicar_transformacoes()
+listanova = transforma.get_pontos()
+for key in listanova:
+    print(key.__dict__)
+
+#transforma.empilha_rotacao_x()
+
+#print(ObjDesenho.__dict__)

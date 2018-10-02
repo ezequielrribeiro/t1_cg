@@ -16,7 +16,7 @@ class Ler_Arquivo:
         with open(self.__arquivo_pontos, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                obj = Ponto(row['x'], row['y'], row['z'])
+                obj = Ponto(float(row['x']), float(row['y']), float(row['z']))
                 conj_pontos[row['label']] = obj
 
         # carregamento da ordem das linhas

@@ -1,3 +1,5 @@
+import numpy as np
+
 class Ponto:
 
     def __init__(self, x=0.0, y=0.0, z=0.0):
@@ -22,3 +24,13 @@ class Ponto:
 
     def set_z(self, z):
         self.__z = z
+
+    def get_matriz_coluna(self) -> np.matrix:
+        return np.matrix(
+            [
+                [self.__x],
+                [self.__y],
+                [self.__z],
+                [1]
+            ]
+        )
