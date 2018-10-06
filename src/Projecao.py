@@ -21,4 +21,10 @@ class Projecao:
             ]
         )
 
-    #def aplicar_perspectiva(self):
+    def get_pontos_perspectiva(self):
+        perspectiva_2d = []
+        for ponto in self.__lista_pontos:
+            temp = self.__matriz_proj_perspec * ponto.get_matriz_coluna()
+            ponto_2d = [temp.item(0, 0)/temp.item(3, 0), temp.item(1, 0)/temp.item(3, 0)]
+            perspectiva_2d.append(ponto_2d)
+        return perspectiva_2d
