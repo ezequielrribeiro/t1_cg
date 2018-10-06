@@ -1,9 +1,9 @@
 import math as mth
 from typing import List
-import copy
-from src.Ponto import Ponto
 
 import numpy as np
+
+from src.Ponto import Ponto
 
 
 class Transformacoes3:
@@ -34,7 +34,7 @@ class Transformacoes3:
         :param ponto: objeto do tipo Ponto a ser adicionado
         :return: void
         """
-        self.__pontos.append(copy.copy(ponto))
+        self.__pontos.append(ponto)
 
 
     def empilha_translacao(self, tr_x, tr_y, tr_z):
