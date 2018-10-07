@@ -36,7 +36,7 @@ class Projecao:
         perspectiva_2d = []
         for ponto in self.__lista_pontos:
             temp = self.__matriz_proj_perspec * ponto.get_matriz_coluna()
-            ponto_2d = [temp.item(0, 0)/temp.item(3, 0), temp.item(1, 0)/temp.item(3, 0)]
+            ponto_2d = [round(temp.item(0, 0)/temp.item(3, 0), 2), round(temp.item(1, 0)/temp.item(3, 0), 2)]
             perspectiva_2d.append(ponto_2d)
         return perspectiva_2d
 
@@ -44,6 +44,6 @@ class Projecao:
         paralela_2d = []
         for ponto in self.__lista_pontos:
             temp = self.__matriz_proj_paralela * ponto.get_matriz_coluna()
-            ponto_2d = [temp.item(0, 0)/temp.item(3, 0), temp.item(1, 0)/temp.item(3, 0)]
+            ponto_2d = [round(temp.item(0, 0)/temp.item(3, 0), 2), round(temp.item(1, 0)/temp.item(3, 0), 2)]
             paralela_2d.append(ponto_2d)
         return paralela_2d
