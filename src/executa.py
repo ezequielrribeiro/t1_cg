@@ -2,6 +2,7 @@ from src.LerArquivo import Ler_Arquivo
 from src.Transformacoes import Transformacoes3
 from src.Camera import Camera
 from src.Projecao import Projecao
+from src.Viewport import Viewport
 
 
 leArquivo = Ler_Arquivo("../pontos.csv", "../desenha_linhas.csv")
@@ -22,8 +23,13 @@ camera.set_camera_pos(0,0,2)
 camera.aplica_transformacoes_camera()
 projeta = Projecao(camera.obter_coordenadas_visualizacao())
 projeta.set_matriz_perspectiva(67,1,0.1,100)
+viewport = Viewport()
+viewport.set_window(-1, -1, 1, 1)
+viewport.set_pontos(projeta.get_pontos_perspectiva())
+viewport.transformar()
 
-for key in projeta.get_pontos_perspectiva():
+
+for key in viewport.get_coordenadas_dispositivo():
     print(key)
 
 #transforma.empilha_rotacao_x()

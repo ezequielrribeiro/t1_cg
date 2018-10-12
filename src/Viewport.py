@@ -33,7 +33,7 @@ class Viewport:
     def set_pontos(self, lista_pontos):
         """
         Setar a lista de pontos a serem mapeados
-        :param lista_pontos: pontos a mapear
+        :param lista_pontos: pontos a mapear do tipo: [[x1, y1], [x2, y2], ...]
         :return: void
         """
         self.__pontos = lista_pontos
