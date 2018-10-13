@@ -60,7 +60,7 @@ class Viewport:
 
         vp_y = (((y_w - self.__window_min[1]) * (self.__viewport_max[1] - self.__viewport_min[1])) /
                 (self.__window_max[1] - self.__window_min[1])) + self.__viewport_min[1]
-        return [vp_x, vp_y]
+        return [int(round(vp_x)), int(round(vp_y))]
 
     def get_coordenadas_dispositivo(self):
         """
