@@ -34,12 +34,12 @@ class Ler_Arquivo:
                 conj_pontos[row['label']] = obj
 
         # carregamento da ordem das linhas
-        conj_linhas = {}
+        conj_linhas = []
         with open(self.__arquivo_linhas, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
-                obj = (row['origem'], row['destino'])
-                conj_linhas[row['label']] = obj
+                obj = [row['origem'], row['destino']]
+                conj_linhas.append(obj)
 
         ObjDesenho = Objeto_Desenho(conj_pontos, conj_linhas)
         return ObjDesenho
