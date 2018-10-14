@@ -12,6 +12,23 @@ class Camera:
 
     def __init__(self, conjunto_pontos=[]):
         self.__transf_camera = Transformacoes3()
+        self.set_conjunto_pontos(conjunto_pontos)
+
+    def reset_camera(self):
+        """
+        Põe a câmera no estado inicial, o mesmo de quando foi
+        iniciada
+        :return: void
+        """
+        self.__transf_camera.reset_transformacoes()
+        self.set_conjunto_pontos()
+
+    def set_conjunto_pontos(self, conjunto_pontos=[]):
+        """
+        Definir o conjunto de pontos a serem modificados
+        :param conjunto_pontos:
+        :return:
+        """
         for ponto in conjunto_pontos:
             self.__transf_camera.adiciona_ponto(ponto)
 

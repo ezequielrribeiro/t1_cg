@@ -36,6 +36,25 @@ class Transformacoes3:
         """
         self.__pontos.append(ponto)
 
+    def reset_transformacoes(self):
+        """
+        Coloca a classe de transformações na 'estaca zero' novamente,
+        limpando a pilha de transformações e matrizes
+        :return: void
+        """
+        self.__pontos = []
+        self.__matrizes_transf = []
+        self.__matriz_final = []
+
+
+    def set_pontos(self, conjunto_pontos=[]):
+        """
+        Define o conjunto de pontos a serem aplicadas as transformações
+        :param conjunto_pontos: lista
+        :return: void
+        """
+        self.__pontos = conjunto_pontos
+
 
     def empilha_translacao(self, tr_x, tr_y, tr_z):
         """

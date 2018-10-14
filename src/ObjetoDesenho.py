@@ -2,7 +2,7 @@ class Objeto_Desenho:
     """
     Classe para manipulação dos pontos e ordem dos vértices a serem desenhados pela aplicação
     """
-    def __init__(self, conj_pontos={}, conj_vertices={}):
+    def __init__(self, conj_pontos={}, conj_vertices=[]):
         """
         Inicialização da classe
         :param conj_pontos: dicionário do tipo: {'label_ponto_1':Ponto1, 'label_ponto_2':Ponto2, ...}
@@ -26,7 +26,7 @@ class Objeto_Desenho:
         """
         return self.__conj_vertices
 
-    def set_conj_pontos(self, conj_pontos):
+    def set_conj_pontos(self, conj_pontos={}):
         """
         Definir o conjunto de pontos a serem manipulados / plotados
         :param conj_pontos: dicionário do tipo: {'label_ponto_1':Ponto1, 'label_ponto_2':Ponto2, ...}
@@ -34,7 +34,7 @@ class Objeto_Desenho:
         """
         self.__conj_pontos = conj_pontos
 
-    def set_conj_vertices(self, conj_vertices):
+    def set_conj_vertices(self, conj_vertices=[]):
         """
         Definir conjunto da ordem da ligação dos pontos
         :param conj_vertices: list do tipo: [['label_ponto_origem1', 'label_ponto_destino1'],
