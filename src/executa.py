@@ -1,16 +1,16 @@
-from src.LerArquivo import Ler_Arquivo
-from src.Transformacoes import Transformacoes3
-from src.Camera import Camera
-from src.Projecao import Projecao
-from src.Viewport import Viewport
-from src.ObjetoDesenho import Objeto_Desenho
+from src.modelo.LerArquivo import Carrega_Objeto_Desenho_Arquivo
+from src.modelo.Transformacoes import Transformacoes3
+from src.modelo.Camera import Camera
+from src.modelo.Projecao import Projecao
+from src.modelo.Viewport import Viewport
+from src.modelo.ObjetoDesenho import Objeto_Desenho
 import copy
 from tkinter import *
 
 
 
-leArquivo = Ler_Arquivo("../pontos.csv", "../desenha_linhas.csv")
-ObjDesenho = leArquivo.ler_arquivo()
+leArquivo = Carrega_Objeto_Desenho_Arquivo()
+ObjDesenho = leArquivo.carrega_objeto_arquivo("../pontos.csv", "../desenha_linhas.csv")
 listaPontos = ObjDesenho.get_conj_pontos()
 transforma = Transformacoes3()
 

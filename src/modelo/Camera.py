@@ -1,7 +1,7 @@
 from typing import List
 
-from src.Transformacoes import Transformacoes3
-from src.Ponto import Ponto
+from src.modelo.Transformacoes import Transformacoes3
+from src.modelo.Ponto import Ponto
 
 
 class Camera:

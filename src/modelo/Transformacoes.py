@@ -3,7 +3,7 @@ from typing import List
 
 import numpy as np
 
-from src.Ponto import Ponto
+from src.modelo.Ponto import Ponto
 
 
 class Transformacoes3:

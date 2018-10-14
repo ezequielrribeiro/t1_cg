@@ -6,15 +6,15 @@ class Projecao:
     """
     Classe responsável por aplicar transformação nos pontos do objeto para reduzir
     a dimensão do espaço R3 para o espaço R2(presente nos monitores, telas, etc).
-    Aplica as projeções do tipo perspectiva e paralela.
-    """
+    Aplica as projeções do tipo perspectiva e paralela.    """
 
-    def __init__(self, pontos):
+    def __init__(self, pontos=[]):
         self.__matriz_proj_perspec = None
         self.__matriz_proj_paralela = None
-        self.__lista_pontos = []
-        for ponto in pontos:
-            self.__lista_pontos.append(copy.copy(ponto))
+        self.__lista_pontos = pontos
+
+    def set_lista_pontos(self, pontos=[]):
+        self.__lista_pontos = pontos
 
     def set_matriz_perspectiva(self, fovy, aspect, z_near, z_far):
         """
@@ -58,7 +58,7 @@ class Projecao:
     def get_pontos_perspectiva(self):
         """
         Aplica a transformação perspectiva e retorna os pontos em R2
-        :return: lista de pontos do tipo: [[x1, y1], [x2, y2], ...]
+        :return: lista de pontos no formato: [[x1, y1], [x2, y2], ...]
         """
         perspectiva_2d = []
         for ponto in self.__lista_pontos:
@@ -70,7 +70,7 @@ class Projecao:
     def get_pontos_paralela(self):
         """
         Aplica a transformação paralela e retorna os pontos em R2
-        :return: lista de pontos do tipo: [[x1, y1], [x2, y2], ...]
+        :return: lista de pontos no formato: [[x1, y1], [x2, y2], ...]
         """
         paralela_2d = []
         for ponto in self.__lista_pontos:
