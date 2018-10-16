@@ -18,9 +18,6 @@ class Transformacoes3:
     transformações empilhadas anteriormente)
     4 - aplicar_transformacoes (aplica as transformacoes nos pontos)
     5 - get_pontos (obter os pontos modificados)
-
-    Obs.: As instâncias dos objetos Ponto retornados pela classe são cópias dos objetos originais,
-    não modificando as instâncias de entrada.
     """
 
     def __init__(self):
@@ -30,7 +27,7 @@ class Transformacoes3:
 
     def adiciona_ponto(self, ponto):
         """
-        Adiciona uma cópia do ponto à lista de pontos interna
+        Adiciona o objeto à lista de pontos interna
         :param ponto: objeto do tipo Ponto a ser adicionado
         :return: void
         """
@@ -50,11 +47,10 @@ class Transformacoes3:
     def set_pontos(self, conjunto_pontos=[]):
         """
         Define o conjunto de pontos a serem aplicadas as transformações
-        :param conjunto_pontos: lista
+        :param conjunto_pontos: lista no formato [[x1, y1], [x2, y2], ...]
         :return: void
         """
         self.__pontos = conjunto_pontos
-
 
     def empilha_translacao(self, tr_x, tr_y, tr_z):
         """
