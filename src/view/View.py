@@ -1,7 +1,6 @@
 from tkinter import *
 from src.modelo.ObjetoDesenho import Objeto_Desenho
 from src.controle.Controle import Controle
-import copy
 
 
 class View:
@@ -45,10 +44,33 @@ class View:
         self.__controle.aplica_parametros(self.__parametros)
         self.desenha_canvas(self.__controle.get_objeto_desenho())
 
+    def sx_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[3].get())
+        self.__parametros['objeto']['escala'][0] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def sy_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[4].get())
+        self.__parametros['objeto']['escala'][1] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def sz_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[5].get())
+        self.__parametros['objeto']['escala'][2] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+
+
     def __definir_acoes_controles(self):
         self.__controles_objeto[0].bind("<Button-1>", self.tx_objeto)
         self.__controles_objeto[1].bind("<Button-1>", self.ty_objeto)
         self.__controles_objeto[2].bind("<Button-1>", self.tz_objeto)
+        self.__controles_objeto[3].bind("<Button-1>", self.sx_objeto)
+        self.__controles_objeto[4].bind("<Button-1>", self.sy_objeto)
+        self.__controles_objeto[5].bind("<Button-1>", self.sz_objeto)
 
     def __criar_container(self, master):
         container_temp = Frame(master)
