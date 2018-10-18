@@ -1,10 +1,18 @@
 from tkinter import *
+from src.modelo.ObjetoDesenho import Objeto_Desenho
+from src.controle.Controle import Controle
+import copy
 
 
 class View:
     def __init__(self, master=None):
+        self.__controle = Controle()
+        self.__controle.carrega_arquivo("../../pontos.csv", "../../desenha_linhas.csv")
+        self.__parametros = self.__controle.get_parametros_padrao()
+        self.__controle.aplica_parametros(self.__parametros)
         self.__containers = []
         self.__controles_objeto = []
+        self.__canvas = None
         for i in range(0, 4):
             self.__containers.append(self.__criar_container(master))
         for i in range(0, 9):
@@ -13,19 +21,34 @@ class View:
         # Widget Canvas
         self.__containers[3]['width'] = 400
         self.__carrega_canvas(self.__containers[3])
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+        # Definir ações dos controles
+        self.__definir_acoes_controles()
 
 
-        """self.widget1 = Frame(master)
-        self.widget1.pack()
-        self.msg = Label(self.widget1, text="Primeiro widget")
-        self.msg["font"] = ("Verdana", "10", "italic", "bold")
-        self.msg.pack()
-        self.sair = Button(self.widget1)
-        self.sair["text"] = "Sair"
-        self.sair["font"] = ("Calibri", "10")
-        self.sair["width"] = 5
-        self.sair["command"] = self.widget1.quit
-        self.sair.pack()"""
+    def tx_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[0].get())
+        self.__parametros['objeto']['transl'][0] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def ty_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[1].get())
+        self.__parametros['objeto']['transl'][1] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def tz_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[2].get())
+        self.__parametros['objeto']['transl'][2] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def __definir_acoes_controles(self):
+        self.__controles_objeto[0].bind("<Button-1>", self.tx_objeto)
+        self.__controles_objeto[1].bind("<Button-1>", self.ty_objeto)
+        self.__controles_objeto[2].bind("<Button-1>", self.tz_objeto)
 
     def __criar_container(self, master):
         container_temp = Frame(master)
@@ -42,10 +65,27 @@ class View:
     def __carrega_canvas(self, master):
         canvas_width = 400
         canvas_height = 400
-        w = Canvas(master,
+        self.__canvas = Canvas(master,
                    width=canvas_width,
                    height=canvas_height)
-        w.pack()
+        self.__canvas.pack()
+
+    def desenha_canvas(self, objeto_desenho: Objeto_Desenho):
+        w_canvas = self.__canvas
+        # "limpar" a tela
+        w_canvas.delete("all")
+        # redesenhar o objeto
+        self.__desenha_objeto(objeto_desenho)
+        # atualizar canvas
+        w_canvas.update()
+
+    def __desenha_objeto(self, objeto_desenho: Objeto_Desenho):
+        w_canvas = self.__canvas
+        lista_imprime = objeto_desenho.get_conj_pontos()
+        linhas_imprimir = objeto_desenho.get_conj_vertices()
+        for linha in linhas_imprimir:
+            w_canvas.create_line(lista_imprime[linha[0]][0], lista_imprime[linha[0]][1], lista_imprime[linha[1]][0],
+                                 lista_imprime[linha[1]][1], fill="white")
 
 
 root = Tk()

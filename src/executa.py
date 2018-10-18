@@ -71,7 +71,6 @@ linhas_imprimir = obj_view.get_conj_vertices()
 for linha in linhas_imprimir:
     print(linha)
     w.create_line(lista_imprime[linha[0]][0], lista_imprime[linha[0]][1], lista_imprime[linha[1]][0], lista_imprime[linha[1]][1], fill="white")
-
 mainloop()
 
 
