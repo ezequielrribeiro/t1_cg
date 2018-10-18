@@ -62,6 +62,23 @@ class View:
         self.__controle.aplica_parametros(self.__parametros)
         self.desenha_canvas(self.__controle.get_objeto_desenho())
 
+    def rx_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[6].get())
+        self.__parametros['objeto']['rotacao'][0] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def ry_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[7].get())
+        self.__parametros['objeto']['rotacao'][1] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def rz_objeto(self, event):
+        valor_controle = float(self.__controles_objeto[8].get())
+        self.__parametros['objeto']['rotacao'][2] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
 
 
     def __definir_acoes_controles(self):
@@ -71,6 +88,9 @@ class View:
         self.__controles_objeto[3].bind("<Button-1>", self.sx_objeto)
         self.__controles_objeto[4].bind("<Button-1>", self.sy_objeto)
         self.__controles_objeto[5].bind("<Button-1>", self.sz_objeto)
+        self.__controles_objeto[6].bind("<Button-1>", self.rx_objeto)
+        self.__controles_objeto[7].bind("<Button-1>", self.ry_objeto)
+        self.__controles_objeto[8].bind("<Button-1>", self.rz_objeto)
 
     def __criar_container(self, master):
         container_temp = Frame(master)
