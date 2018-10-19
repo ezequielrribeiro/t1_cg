@@ -31,7 +31,7 @@ class Transformacoes3:
         :param ponto: objeto do tipo Ponto a ser adicionado
         :return: void
         """
-        self.__pontos.append(ponto)
+        self.__pontos.append(ponto.get_copia())
 
     def reset_transformacoes(self):
         """
@@ -50,7 +50,8 @@ class Transformacoes3:
         :param conjunto_pontos: lista no formato [[x1, y1], [x2, y2], ...]
         :return: void
         """
-        self.__pontos = conjunto_pontos
+        for ponto in conjunto_pontos:
+            self.__pontos.append(ponto.get_copia())
 
     def empilha_translacao(self, tr_x, tr_y, tr_z):
         """

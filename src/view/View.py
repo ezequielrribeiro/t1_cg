@@ -11,11 +11,19 @@ class View:
         self.__controle.aplica_parametros(self.__parametros)
         self.__containers = []
         self.__controles_objeto = []
+        self.__controles_camera = []
+        self.__controles_wpvp = []
         self.__canvas = None
         for i in range(0, 4):
             self.__containers.append(self.__criar_container(master))
         for i in range(0, 9):
-            self.__controles_objeto.append(self.__criar_spinbox(self.__containers[0], -10, 10, '%.1f', 0.1))
+            self.__controles_objeto.append(self.__criar_spinbox(self.__containers[0], -100, 100, '%.1f', 0.1))
+        for i in range(0, 6):
+            self.__controles_camera.append(self.__criar_spinbox(self.__containers[1], -100, 100, '%.1f', 0.1))
+        for i in range(0, 12):
+            self.__controles_wpvp.append(self.__criar_spinbox(self.__containers[2], -200, 100, '%.1f', 0.1))
+
+
 
         # Widget Canvas
         self.__containers[3]['width'] = 400
@@ -80,6 +88,42 @@ class View:
         self.__controle.aplica_parametros(self.__parametros)
         self.desenha_canvas(self.__controle.get_objeto_desenho())
 
+    def tx_camera(self, event):
+        valor_controle = float(self.__controles_camera[0].get())
+        self.__parametros['camera']['posicao'][0] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def ty_camera(self, event):
+        valor_controle = float(self.__controles_camera[1].get())
+        self.__parametros['camera']['posicao'][1] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def tz_camera(self, event):
+        valor_controle = float(self.__controles_camera[2].get())
+        self.__parametros['camera']['posicao'][2] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def rx_camera(self, event):
+        valor_controle = float(self.__controles_camera[3].get())
+        self.__parametros['camera']['rotacao'][0] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def ry_camera(self, event):
+        valor_controle = float(self.__controles_camera[4].get())
+        self.__parametros['camera']['rotacao'][1] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def rz_camera(self, event):
+        valor_controle = float(self.__controles_camera[5].get())
+        self.__parametros['camera']['rotacao'][2] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
 
     def __definir_acoes_controles(self):
         self.__controles_objeto[0].bind("<Button-1>", self.tx_objeto)
@@ -91,6 +135,13 @@ class View:
         self.__controles_objeto[6].bind("<Button-1>", self.rx_objeto)
         self.__controles_objeto[7].bind("<Button-1>", self.ry_objeto)
         self.__controles_objeto[8].bind("<Button-1>", self.rz_objeto)
+
+        self.__controles_camera[0].bind("<Button-1>", self.tx_camera)
+        self.__controles_camera[1].bind("<Button-1>", self.ty_camera)
+        self.__controles_camera[2].bind("<Button-1>", self.tz_camera)
+        self.__controles_camera[3].bind("<Button-1>", self.rx_camera)
+        self.__controles_camera[4].bind("<Button-1>", self.ry_camera)
+        self.__controles_camera[5].bind("<Button-1>", self.rz_camera)
 
     def __criar_container(self, master):
         container_temp = Frame(master)

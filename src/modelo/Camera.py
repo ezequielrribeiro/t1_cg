@@ -11,8 +11,12 @@ class Camera:
     """
 
     def __init__(self, conjunto_pontos=[]):
+        self.__conj_pontos = []
+        for ponto in conjunto_pontos:
+            self.__conj_pontos.append(ponto.get_copia())
+
         self.__transf_camera = Transformacoes3()
-        self.set_conjunto_pontos(conjunto_pontos)
+        self.set_conjunto_pontos(self.__conj_pontos)
 
     def reset_camera(self):
         """
@@ -21,7 +25,7 @@ class Camera:
         :return: void
         """
         self.__transf_camera.reset_transformacoes()
-        self.set_conjunto_pontos()
+        self.set_conjunto_pontos(self.__conj_pontos)
 
     def set_conjunto_pontos(self, conjunto_pontos=[]):
         """
@@ -30,7 +34,7 @@ class Camera:
         :return:
         """
         for ponto in conjunto_pontos:
-            self.__transf_camera.adiciona_ponto(ponto)
+            self.__transf_camera.adiciona_ponto(ponto.get_copia())
 
     def set_camera_pos(self, x, y, z):
         """
@@ -40,7 +44,7 @@ class Camera:
         :param z: coordenada no eixo z para transladar a câmera
         :return: void
         """
-        self.__transf_camera.empilha_translacao(-x, -y, -z)
+        self.__transf_camera.empilha_translacao((-1)*x, (-1)*y, (-1)*z)
 
     def rotacionar_camera_x(self, angulo):
         """

@@ -86,12 +86,9 @@ class Controle:
 
         # Rotacionar o objeto
         obj_rot = parametros['objeto']['rotacao']
-        if obj_rot[0] != 0.0:
-            self.__objeto_transf.empilha_rotacao_x(obj_rot[0])
-        if obj_rot[1] != 0.0:
-            self.__objeto_transf.empilha_rotacao_y(obj_rot[1])
-        if obj_rot[2] != 0.0:
-            self.__objeto_transf.empilha_rotacao_z(obj_rot[2])
+        self.__objeto_transf.empilha_rotacao_x(obj_rot[0])
+        self.__objeto_transf.empilha_rotacao_y(obj_rot[1])
+        self.__objeto_transf.empilha_rotacao_z(obj_rot[2])
 
         # Transladar o objeto
         obj_transl = parametros['objeto']['transl']
@@ -108,12 +105,9 @@ class Controle:
         self.__camera_transf.set_camera_pos(cam_t[0], cam_t[1], cam_t[2])
         # Câmera - rotação
         cam_rot = parametros['camera']['rotacao']
-        if cam_rot[0] != 0.0:
-            self.__camera_transf.rotacionar_camera_x(cam_rot[0])
-        if cam_rot[1] != 0.0:
-            self.__camera_transf.rotacionar_camera_y(cam_rot[1])
-        if cam_rot[2] != 0.0:
-            self.__camera_transf.rotacionar_camera_z(cam_rot[2])
+        self.__camera_transf.rotacionar_camera_x(cam_rot[0])
+        self.__camera_transf.rotacionar_camera_y(cam_rot[1])
+        self.__camera_transf.rotacionar_camera_z(cam_rot[2])
         self.__camera_transf.aplica_transformacoes_camera()
 
         # Projeção

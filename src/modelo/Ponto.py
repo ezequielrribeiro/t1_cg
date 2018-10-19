@@ -75,3 +75,6 @@ class Ponto:
                 [1]
             ]
         )
+
+    def get_copia(self):
+        return Ponto(self.__x, self.__y, self.__z)
