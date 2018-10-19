@@ -124,6 +124,21 @@ class View:
         self.__controle.aplica_parametros(self.__parametros)
         self.desenha_canvas(self.__controle.get_objeto_desenho())
 
+    def set_winmin(self, event):
+        valor_controle = float(self.__controles_wpvp[0].get())
+        self.__parametros['viewport']['win_min'][0] = valor_controle
+        self.__parametros['viewport']['win_min'][1] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_winmax(self, event):
+        valor_controle = float(self.__controles_wpvp[1].get())
+        self.__parametros['viewport']['win_max'][0] = valor_controle
+        self.__parametros['viewport']['win_max'][1] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+
 
     def __definir_acoes_controles(self):
         self.__controles_objeto[0].bind("<Button-1>", self.tx_objeto)
@@ -143,6 +158,9 @@ class View:
         self.__controles_camera[4].bind("<Button-1>", self.ry_camera)
         self.__controles_camera[5].bind("<Button-1>", self.rz_camera)
 
+        self.__controles_wpvp[0].bind("<Button-1>", self.set_winmin)
+        self.__controles_wpvp[1].bind("<Button-1>", self.set_winmax)
+
     def __criar_container(self, master):
         container_temp = Frame(master)
         container_temp["width"] = 200
@@ -151,7 +169,7 @@ class View:
         return container_temp
 
     def __criar_spinbox(self, master, from_, to_, formato, incremento=1.0):
-        w = Spinbox(master, from_=from_, to=to_, format=formato, increment=incremento)
+        w = Spinbox(master, from_=from_, to=to_)
         w.pack()
         return w
 
