@@ -23,8 +23,6 @@ class View:
         for i in range(0, 12):
             self.__controles_wpvp.append(self.__criar_spinbox(self.__containers[2], -200, 100, '%.1f', 0.1))
 
-
-
         # Widget Canvas
         self.__containers[3]['width'] = 400
         self.__carrega_canvas(self.__containers[3])
@@ -138,6 +136,75 @@ class View:
         self.__controle.aplica_parametros(self.__parametros)
         self.desenha_canvas(self.__controle.get_objeto_desenho())
 
+    def set_fovy(self, event):
+        valor_controle = float(self.__controles_wpvp[2].get())
+        self.__parametros['projecao']['definida'] = 'perspectiva'
+        self.__parametros['projecao']['perspectiva']['fovy'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_znear(self, event):
+        valor_controle = float(self.__controles_wpvp[3].get())
+        self.__parametros['projecao']['definida'] = 'perspectiva'
+        self.__parametros['projecao']['perspectiva']['z_near'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_zfar(self, event):
+        valor_controle = float(self.__controles_wpvp[4].get())
+        self.__parametros['projecao']['definida'] = 'perspectiva'
+        self.__parametros['projecao']['perspectiva']['z_far'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_aspect(self, event):
+        valor_controle = float(self.__controles_wpvp[5].get())
+        self.__parametros['projecao']['definida'] = 'perspectiva'
+        self.__parametros['projecao']['perspectiva']['aspect'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_xleft(self, event):
+        valor_controle = float(self.__controles_wpvp[6].get())
+        self.__parametros['projecao']['definida'] = 'paralela'
+        self.__parametros['projecao']['paralela']['x_left'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_xright(self, event):
+        valor_controle = float(self.__controles_wpvp[7].get())
+        self.__parametros['projecao']['definida'] = 'paralela'
+        self.__parametros['projecao']['paralela']['x_right'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_ybottom(self, event):
+        valor_controle = float(self.__controles_wpvp[8].get())
+        self.__parametros['projecao']['definida'] = 'paralela'
+        self.__parametros['projecao']['paralela']['y_bottom'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_ytop(self, event):
+        valor_controle = float(self.__controles_wpvp[9].get())
+        self.__parametros['projecao']['definida'] = 'paralela'
+        self.__parametros['projecao']['paralela']['y_top'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_pznear(self, event):
+        valor_controle = float(self.__controles_wpvp[10].get())
+        self.__parametros['projecao']['definida'] = 'paralela'
+        self.__parametros['projecao']['paralela']['z_near'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
+
+    def set_pzfar(self, event):
+        valor_controle = float(self.__controles_wpvp[11].get())
+        self.__parametros['projecao']['definida'] = 'paralela'
+        self.__parametros['projecao']['paralela']['z_far'] = valor_controle
+        self.__controle.aplica_parametros(self.__parametros)
+        self.desenha_canvas(self.__controle.get_objeto_desenho())
 
 
     def __definir_acoes_controles(self):
@@ -160,6 +227,17 @@ class View:
 
         self.__controles_wpvp[0].bind("<Button-1>", self.set_winmin)
         self.__controles_wpvp[1].bind("<Button-1>", self.set_winmax)
+        self.__controles_wpvp[2].bind("<Button-1>", self.set_fovy)
+        self.__controles_wpvp[3].bind("<Button-1>", self.set_znear)
+        self.__controles_wpvp[4].bind("<Button-1>", self.set_zfar)
+        self.__controles_wpvp[5].bind("<Button-1>", self.set_aspect)
+
+        self.__controles_wpvp[6].bind("<Button-1>", self.set_xleft)
+        self.__controles_wpvp[7].bind("<Button-1>", self.set_xright)
+        self.__controles_wpvp[8].bind("<Button-1>", self.set_ybottom)
+        self.__controles_wpvp[9].bind("<Button-1>", self.set_ytop)
+        self.__controles_wpvp[10].bind("<Button-1>", self.set_pznear)
+        self.__controles_wpvp[11].bind("<Button-1>", self.set_pzfar)
 
     def __criar_container(self, master):
         container_temp = Frame(master)
@@ -197,6 +275,12 @@ class View:
         for linha in linhas_imprimir:
             w_canvas.create_line(lista_imprime[linha[0]][0], lista_imprime[linha[0]][1], lista_imprime[linha[1]][0],
                                  lista_imprime[linha[1]][1], fill="white")
+        for ponto in lista_imprime:
+            #print(ponto)
+            w_canvas.create_text(lista_imprime[ponto][0], lista_imprime[ponto][1], fill="darkblue", font="Times 20 italic bold",
+                                text=ponto)
+            w_canvas.create_oval(lista_imprime[ponto][0], lista_imprime[ponto][1], lista_imprime[ponto][0], lista_imprime[ponto][1], width=0.01, fill="white")
+
 
 
 root = Tk()

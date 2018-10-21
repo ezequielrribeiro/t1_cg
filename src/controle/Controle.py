@@ -40,12 +40,12 @@ class Controle:
                     'z_far': 100
                 },
                 'paralela': {
-                    'x_left': 0.0,
+                    'x_left': -1.0,
                     'x_right': 1.0,
                     'y_top': 1.0,
-                    'y_bottom': 0.0,
-                    'z_near': 0.1,
-                    'z_far': 100
+                    'y_bottom': -1.0,
+                    'z_near': -1.0,
+                    'z_far': 1.0
                 }
             },
             'viewport': {
@@ -114,21 +114,20 @@ class Controle:
         self.__projecao.set_lista_pontos(self.__camera_transf.obter_coordenadas_visualizacao())
 
         pontos_projecao = None
-        if self.__parametros_padrao['projecao']['definida'] == 'perspectiva':
-            perspec = self.__parametros_padrao['projecao']['perspectiva']
+        if parametros['projecao']['definida'] == 'perspectiva':
+            perspec = parametros['projecao']['perspectiva']
             self.__projecao.set_matriz_perspectiva(perspec['fovy'], perspec['aspect'], perspec['z_near'],
                                                    perspec['z_far'])
             pontos_projecao = self.__projecao.get_pontos_perspectiva()
         else:
-            paralela = self.__parametros_padrao['projecao']['paralela']
+            paralela = parametros['projecao']['paralela']
             self.__projecao.set_matriz_paralela(paralela['x_left'], paralela['x_right'], paralela['y_top'],
                                                 paralela['y_bottom'], paralela['z_near'], paralela['z_far'])
             pontos_projecao = self.__projecao.get_pontos_paralela()
 
         # Viewport
-        win_min = self.__parametros_padrao['viewport']['win_min']
-        win_max = self.__parametros_padrao['viewport']['win_max']
-
+        win_min = parametros['viewport']['win_min']
+        win_max = parametros['viewport']['win_max']
         self.__viewport.set_window(win_min[0], win_min[1], win_max[0], win_max[1])
         self.__viewport.set_pontos(pontos_projecao)
         self.__viewport.transformar()
